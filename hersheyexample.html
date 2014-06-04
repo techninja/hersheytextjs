@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>hersheytext.js Font Render Example</title>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <style type="text/css">
+      body {
+        font-family: sans-serif;
+      }
+
+      fieldset {
+        position: absolute;
+        left: 500px;
+      }
+
+      fieldset input, fieldset select {
+        margin-bottom: 1em;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <fieldset><legend>Options</legend>
+      <select id="fontselect">
+        <option id="loading">Loading Fonts...</option>
+      </select>
+
+      <input id="fonttext" type="text" value="Hello World!">
+    </fieldset>
+
+    <div id="main" >
+      <svg xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink" width="450" height="800">
+
+
+      </svg>
+    </div>
+
+<script type="text/javascript">
+
+  // Load the font JSON data
+  $.getJSON('hersheytext.min.json', function(fonts){
+
+    // Font data is loaded!
+    $('#loading').remove();
+
+    // Populate font choices
+    for (var id in fonts) {
+      $('<option>').text(fonts[id].name).val(id).appendTo('#fontselect');
+    }
+
+    $('#fontselect').change(function(){
+      $('#textexample').remove(); // Kill the old one (if any)
+
+      // Render some text into the SVG area with it
+      renderText($('#fonttext').val(), {
+        font: fonts[$(this).val()],
+        pos: {x: 0, y: 0},
+        scale: 2,
+        charWidth: 8,
+        wrapWidth: 70,
+        centerWidth: 200,
+        target: '#main svg',
+        id: 'textexample'
+      });
+
+      // REQUIRED: Refresh DOM to reinstate node status with XML namespaces
+      // TODO: There must be a better way to do this! :P
+      $('#main').html($('#main').html());
+    }).attr('size', 10).change(); // Trigger initial run
+
+    // Re-render on keypress
+    $('input').on('input', function(e){
+      $('#fontselect').change();
+    });
+  });
+
+
+/**
+ * Render a string of text in a Hershey engraving font to a given SVG element
+ *
+ * @param {string} s
+ *   Text string to be rendered
+ * @param {object} options
+ *   Object of named options:
+ *    font {obj}: [Required] Font object containing path elements for font
+ *    id {string}: [Required] ID to give the final g(roup) SVG DOM object
+ *    pos {object}: [Required] {X, Y} object of where to place the final object within the SVG
+ *    charWidth {int}: [Optional] Base width given to each character
+ *    charHeight {int}: [Optional] Base height given to each character (when wrapping)
+ *    scale {int}: [Optional] Scale to multiply size of everything by
+ *    wrapWidth {int}: [Optional] Max line size at which to wrap to the next line
+ *    centerWidth {int}: [Optional] Width to center multiline text inside of
+ *
+ * @returns {boolean}
+ *   Operates directly on the given target given in options, returns false if
+ *   required option missing or other failure.
+ */
+  function renderText(s, options) {
+    try {
+      var font = options.font.chars;
+      options.charWidth = options.charWidth ? options.charWidth : 10;
+      options.charHeight = options.charHeight ? options.charHeight : 28;
+
+      var offset = {left: 0, top: 0};
+      options.scale = options.scale ? options.scale : 1;
+
+      // Create central group
+      var $group = $('<g>').attr({
+        id: options.id,
+        style: 'stroke:#000000; fill:none;',
+        transform:
+          'scale(' + options.scale + ') ' +
+          'translate(' + options.pos.x + ',' + options.pos.y + ')'
+      });
+      $(options.target).prepend($group);
+
+      // Initial Line container
+      var lineCount = 0;
+      var $groupLine = $('<g>').attr('id', options.id + '-line-' + lineCount);
+      $group.prepend($groupLine);
+
+      // Move through each word
+      var words = s.split(' ');
+      for(var w in words) {
+        var word = words[w];
+
+        // Move through each letter
+        for(var i in word) {
+          var index = word.charCodeAt(i) - 33;
+
+          // Only print in range chars
+          var charOffset = options.charWidth;
+          if (font[index]){
+            charOffset = font[index].o;
+
+            // Add the char to the DOM
+            $groupLine.prepend(
+              $('<path>').attr({
+                d: font[index].d,
+                style: 'stroke:#000000; fill:none;',
+                fill: 'none',
+                transform: 'translate(' + offset.left + ', ' + offset.top + ')'
+              })
+            );
+          }
+
+          // Add space between
+          offset.left+= charOffset + options.charWidth;
+        }
+
+        // Wrap words to width
+        if (options.wrapWidth) {
+           if (offset.left > options.wrapWidth) {
+             if (options.centerWidth) {
+               var c = (options.centerWidth / 2) - (offset.left / 2);
+               $groupLine.attr('transform', 'translate(' + c + ',0)');
+             }
+
+             offset.left = 0;
+             offset.top+= options.charHeight;
+
+             // New Line container
+             lineCount++;
+             $groupLine = $('<g>').attr('id', options.id + '-line-' + lineCount);
+             $group.prepend($groupLine);
+           } else {
+             offset.left+= options.charWidth*2; // Add regular space
+           }
+         } else {
+           offset.left+= options.charWidth*2; // Add regular space
+         }
+       }
+
+      if (options.centerWidth) {
+        var c = (options.centerWidth / 2) - (offset.left / 2);
+        $groupLine.attr('transform', 'translate(' + c + ',0)');
+      }
+
+      if (options.centerHeight) {
+        var c = (options.centerHeight / 2) - ((options.charHeight*(lineCount+1)) / 2) + options.pos.y;
+        $group.attr({
+          transform:
+          'scale(' + options.scale + ') ' +
+          'translate(' + options.pos.x + ',' + c + ')'
+        });
+      }
+    } catch(e) {
+      console.error(e);
+      return false; // Error!
+    }
+
+    return true; // We should be all good!
+  }
+
+
+</script>
+
+  </body>
+</html>
