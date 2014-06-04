@@ -6,8 +6,8 @@ A port of the
 data from the [Hershey Text Inkscape Plugin](https://code.google.com/p/eggbotcode/downloads/list?can=3&q=hershey)
 to JSON, capable of being rendered quickly via JavaScript & SVG.
 
-This includes an quickly written example renderer, see the demo on the live
-github page to give it a try!
+This includes an quickly written example renderer, see the demo on the
+[live github page](http://techninja.github.io/hersheytextjs/) to give it a try!
 
 --------
 JSON data Public Domain, All other code MIT Licensed.
