@@ -1,0 +1,3 @@
+[submodule "hersheytextjs"]
+        path = hersheytextjs
+        url = https://github.com/techninja/hersheytextjs.git
