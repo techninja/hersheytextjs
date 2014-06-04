@@ -11,7 +11,8 @@
 
       fieldset {
         position: absolute;
-        left: 500px;
+        left: 440px;
+        background-color: #fff;
       }
 
       fieldset input, fieldset select {
@@ -22,19 +23,16 @@
   </head>
   <body>
     <fieldset><legend>Options</legend>
+      <input id="fonttext" type="text" value="Hello World!">
+
       <select id="fontselect">
         <option id="loading">Loading Fonts...</option>
       </select>
-
-      <input id="fonttext" type="text" value="Hello World!">
     </fieldset>
 
     <div id="main" >
       <svg xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink" width="450" height="800">
-
-
-      </svg>
+      xmlns:xlink="http://www.w3.org/1999/xlink" width="450" height="280"></svg>
     </div>
 
 <script type="text/javascript">
@@ -92,6 +90,7 @@
  *    scale {int}: [Optional] Scale to multiply size of everything by
  *    wrapWidth {int}: [Optional] Max line size at which to wrap to the next line
  *    centerWidth {int}: [Optional] Width to center multiline text inside of
+ *    centerHeight {int}: [Optional] Height to center text inside of vertically
  *
  * @returns {boolean}
  *   Operates directly on the given target given in options, returns false if
