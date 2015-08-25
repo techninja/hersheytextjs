@@ -1,0 +1,27 @@
+{
+  "name": "hersheytext",
+  "description": "A port of the Hershey engraving fonts to JSON for JavaScript/SVG",
+  "version": "0.5.0",
+  "main": "lib/hersheytext.js",
+  "maintainers": [
+    {
+      "name": "techninja",
+      "email": "james@tn42.com",
+      "web": "https://github.com/techninja"
+    }
+  ],
+  "demos": [
+    "http://techninja.github.io/hersheytextjs/"
+  ],
+  "bugs": {
+    "url": "https://github.com/techninja/hersheytextjs/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/techninja/hersheytextjs.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "~0.19.0"
+  }
+}
