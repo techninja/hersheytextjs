@@ -1,0 +1,92 @@
+{
+  "ems_allure": {
+    "file": "EMSAllure.svg",
+    "name": "EMS Allure",
+    "id": "ems_allure"
+  },
+  "ems_elfin": {
+    "file": "EMSElfin.svg",
+    "name": "EMS Elfin",
+    "id": "ems_elfin"
+  },
+  "ems_felix": {
+    "file": "EMSFelix.svg",
+    "name": "EMS Felix",
+    "id": "ems_felix"
+  },
+  "ems_nixish": {
+    "file": "EMSNixish.svg",
+    "name": "EMS Nixish",
+    "id": "ems_nixish"
+  },
+  "ems_nixishitalic": {
+    "file": "EMSNixishItalic.svg",
+    "name": "EMS NixishItalic",
+    "id": "ems_nixishitalic"
+  },
+  "ems_osmotron": {
+    "file": "EMSOsmotron.svg",
+    "name": "EMS Osmotron",
+    "id": "ems_osmotron"
+  },
+  "ems_readability": {
+    "file": "EMSReadability.svg",
+    "name": "EMS Readability",
+    "id": "ems_readability"
+  },
+  "ems_readabilityitalic": {
+    "file": "EMSReadabilityItalic.svg",
+    "name": "EMS ReadabilityItalic",
+    "id": "ems_readabilityitalic"
+  },
+  "ems_tech": {
+    "file": "EMSTech.svg",
+    "name": "EMS Tech",
+    "id": "ems_tech"
+  },
+  "hershey_goth_english": {
+    "file": "HersheyGothEnglish.svg",
+    "name": "Hershey Goth English",
+    "id": "hershey_goth_english"
+  },
+  "hershey_sans_1": {
+    "file": "HersheySans1.svg",
+    "name": "Hershey Sans 1",
+    "id": "hershey_sans_1"
+  },
+  "hershey_sans_med": {
+    "file": "HersheySansMed.svg",
+    "name": "Hershey Sans Med",
+    "id": "hershey_sans_med"
+  },
+  "hershey_script_1": {
+    "file": "HersheyScript1.svg",
+    "name": "Hershey Script 1",
+    "id": "hershey_script_1"
+  },
+  "hershey_script_med": {
+    "file": "HersheyScriptMed.svg",
+    "name": "Hershey Script Med",
+    "id": "hershey_script_med"
+  },
+  "hershey_serif_bold": {
+    "file": "HersheySerifBold.svg",
+    "name": "Hershey Serif Bold",
+    "id": "hershey_serif_bold"
+  },
+  "hershey_serif_bold_italic": {
+    "file": "HersheySerifBoldItalic.svg",
+    "name": "Hershey Serif Bold Italic",
+    "id": "hershey_serif_bold_italic"
+  },
+  "hershey_serif_med": {
+    "file": "HersheySerifMed.svg",
+    "name": "Hershey Serif Med",
+    "id": "hershey_serif_med"
+  },
+  "hershey_serif_med_italic": {
+    "file": "HersheySerifMedItalic.svg",
+    "name": "Hershey Serif Med Italic",
+    "id": "hershey_serif_med_italic"
+  }
+}
