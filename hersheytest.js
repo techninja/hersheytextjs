@@ -1,8 +1,10 @@
  // In a normal app, this would simply by "require('hersheytext');"
-var hersheyText = require('./lib/hersheytext');
+const hersheyText = require('./lib/hersheytext');
 
-var svgText = hersheyText.renderTextSVG('Hello', {
+const svgText = hersheyText.renderTextSVG('Hello', {
   id: 'mytext',
+  font: 'ems_allure',
+  charWidth: 1,
   pos: {x: 50, y: 50}
 });
 
@@ -10,14 +12,18 @@ if (svgText !== false) {
   console.log("SVG XML:\n", svgText, "\n\n");
 }
 
-var arrayText = hersheyText.renderTextArray('Hello World!');
+const arrayText = hersheyText.renderTextArray('Hello World!');
 
 if (arrayText !== false) {
   console.log("Array of character data:\n", arrayText);
 }
 
 console.log("\n\nFonts available:");
-for (var key in hersheyText.fonts) {
+for (var key in hersheyText.getFonts) {
   var f = hersheyText.fonts[key];
-  console.log('"' + key + '":', f.name);
+  console.log(`Hershey font "${key}":, ${f.name}`);
+}
+for (var key in hersheyText.svgFonts) {
+  var f = hersheyText.svgFonts[key];
+  console.log(`SVG font "${key}":, ${f.name}`);
 }
