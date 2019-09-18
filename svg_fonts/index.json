@@ -1,0 +1,74 @@
+{
+  "ems_allure": {
+    "file": "EMSAllure.svg",
+    "name": "EMS Allure"
+  },
+  "ems_elfin": {
+    "file": "EMSElfin.svg",
+    "name": "EMS Elfin"
+  },
+  "ems_felix": {
+    "file": "EMSFelix.svg",
+    "name": "EMS Felix"
+  },
+  "ems_nixish": {
+    "file": "EMSNixish.svg",
+    "name": "EMS Nixish"
+  },
+  "ems_nixish_italic": {
+    "file": "EMSNixishItalic.svg",
+    "name": "EMS Nixish Italic"
+  },
+  "ems_osmotron": {
+    "file": "EMSOsmotron.svg",
+    "name": "EMS Osmotron"
+  },
+  "ems_readability": {
+    "file": "EMSReadability.svg",
+    "name": "EMS Readability"
+  },
+  "ems_readability_italic": {
+    "file": "EMSReadabilityItalic.svg",
+    "name": "EMS Readability Italic"
+  },
+  "ems_tech": {
+    "file": "EMSTech.svg",
+    "name": "EMS Tech"
+  },
+  "hershey_goth_english": {
+    "file": "HersheyGothEnglish.svg",
+    "name": "Hershey Goth English"
+  },
+  "hershey_sans_1": {
+    "file": "HersheySans1.svg",
+    "name": "Hershey Sans 1"
+  },
+  "hershey_sans_med": {
+    "file": "HersheySansMed.svg",
+    "name": "Hershey Sans Med"
+  },
+  "hershey_script_1": {
+    "file": "HersheyScript1.svg",
+    "name": "Hershey Script 1"
+  },
+  "hershey_script_med": {
+    "file": "HersheyScriptMed.svg",
+    "name": "Hershey Script Med"
+  },
+  "hershey_serif_bold": {
+    "file": "HersheySerifBold.svg",
+    "name": "Hershey Serif Bold"
+  },
+  "hershey_serif_bold_italic": {
+    "file": "HersheySerifBoldItalic.svg",
+    "name": "Hershey Serif Bold Italic"
+  },
+  "hershey_serif_med": {
+    "file": "HersheySerifMed.svg",
+    "name": "Hershey Serif Med"
+  },
+  "hershey_serif_med_italic": {
+    "file": "HersheySerifMedItalic.svg",
+    "name": "Hershey Serif Med Italic"
+  }
+}
