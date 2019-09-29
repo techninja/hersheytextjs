@@ -1,7 +1,7 @@
 {
   "name": "hersheytext",
   "description": "A port of the Hershey engraving fonts to JSON for JavaScript/SVG",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "lib/hersheytext.js",
   "maintainers": [
     {
