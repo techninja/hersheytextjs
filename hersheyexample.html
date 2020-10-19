@@ -19,6 +19,11 @@
         margin-bottom: 1em;
         display: block;
       }
+
+      textarea {
+        width: 100%;
+        height: 8em;
+      }
     </style>
   </head>
   <body>
@@ -35,6 +40,9 @@
       xmlns:xlink="http://www.w3.org/1999/xlink" width="450" height="280"></svg>
     </div>
 
+    <label>Raw SVG content of text</label><br>
+    <textarea></textarea>
+
 <script type="text/javascript">
 
   // Load the font JSON data
@@ -44,11 +52,11 @@
     $('#loading').remove();
 
     // Populate font choices
-    for (var id in fonts) {
+    for (let id in fonts) {
       $('<option>').text(fonts[id].name).val(id).appendTo('#fontselect');
     }
 
-    $('#fontselect').change(function(){
+    $('#fontselect').change(function() {
       $('#textexample').remove(); // Kill the old one (if any)
 
       // Render some text into the SVG area with it
@@ -66,6 +74,7 @@
       // REQUIRED: Refresh DOM to reinstate node status with XML namespaces
       // TODO: There must be a better way to do this! :P
       $('#main').html($('#main').html());
+      $('textarea').val($('#main svg')[0].outerHTML);
     }).attr('size', 10).change(); // Trigger initial run
 
     // Re-render on keypress
@@ -98,15 +107,15 @@
  */
   function renderText(s, options) {
     try {
-      var font = options.font.chars;
+      const font = options.font.chars;
       options.charWidth = options.charWidth ? options.charWidth : 10;
       options.charHeight = options.charHeight ? options.charHeight : 28;
 
-      var offset = {left: 0, top: 0};
+      const offset = { left: 0, top: 0 };
       options.scale = options.scale ? options.scale : 1;
 
       // Create central group
-      var $group = $('<g>').attr({
+      const $group = $('<g>').attr({
         id: options.id,
         style: 'stroke:#000000; fill:none;',
         transform:
@@ -116,21 +125,21 @@
       $(options.target).prepend($group);
 
       // Initial Line container
-      var lineCount = 0;
-      var $groupLine = $('<g>').attr('id', options.id + '-line-' + lineCount);
+      let lineCount = 0;
+      let $groupLine = $('<g>').attr('id', options.id + '-line-' + lineCount);
       $group.prepend($groupLine);
 
       // Move through each word
-      var words = s.split(' ');
-      for(var w in words) {
-        var word = words[w];
+      const words = s.split(' ');
+      for(let w in words) {
+        const word = words[w];
 
         // Move through each letter
-        for(var i in word) {
-          var index = word.charCodeAt(i) - 33;
+        for(let i in word) {
+          const index = word.charCodeAt(i) - 33;
 
           // Only print in range chars
-          var charOffset = options.charWidth;
+          let charOffset = options.charWidth;
           if (font[index]){
             charOffset = font[index].o;
 
@@ -153,32 +162,32 @@
         if (options.wrapWidth) {
            if (offset.left > options.wrapWidth) {
              if (options.centerWidth) {
-               var c = (options.centerWidth / 2) - (offset.left / 2);
+               const c = (options.centerWidth / 2) - (offset.left / 2);
                $groupLine.attr('transform', 'translate(' + c + ',0)');
              }
 
              offset.left = 0;
-             offset.top+= options.charHeight;
+             offset.top += options.charHeight;
 
              // New Line container
              lineCount++;
              $groupLine = $('<g>').attr('id', options.id + '-line-' + lineCount);
              $group.prepend($groupLine);
            } else {
-             offset.left+= options.charWidth*2; // Add regular space
+             offset.left += options.charWidth*2; // Add regular space
            }
          } else {
-           offset.left+= options.charWidth*2; // Add regular space
+           offset.left += options.charWidth*2; // Add regular space
          }
        }
 
       if (options.centerWidth) {
-        var c = (options.centerWidth / 2) - (offset.left / 2);
+        const c = (options.centerWidth / 2) - (offset.left / 2);
         $groupLine.attr('transform', 'translate(' + c + ',0)');
       }
 
       if (options.centerHeight) {
-        var c = (options.centerHeight / 2) - ((options.charHeight*(lineCount+1)) / 2) + options.pos.y;
+        const c = (options.centerHeight / 2) - ((options.charHeight*(lineCount+1)) / 2) + options.pos.y;
         $group.attr({
           transform:
           'scale(' + options.scale + ') ' +
