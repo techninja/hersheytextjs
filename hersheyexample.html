@@ -7,41 +7,71 @@
     <style type="text/css">
       body {
         font-family: sans-serif;
+        max-width: 640px;
       }
 
       fieldset {
-        position: absolute;
-        left: 440px;
         background-color: #fff;
       }
 
       fieldset input, fieldset select {
         margin-bottom: 1em;
         display: block;
+        min-width: 200px;
       }
 
       textarea {
         width: 100%;
+        height: 300px;
+      }
+
+      #fonttext {
+        font-size: 1.25em;
+        width: 100%;
+      }
+
+      #fontselect {
         height: 8em;
+        font-size: 0.75em;
+      }
+
+      #main {
+        padding: 1em;
+      }
+
+      button {
+        height: 3em;
+        font-size: 1em;
+      }
+
+      .hidden {
+        display: none;
       }
     </style>
   </head>
   <body>
-    <fieldset><legend>Options</legend>
+    <fieldset>
+      <!-- <legend>Options</legend> -->
+      <label for="fonttext">Input text:</label>
       <input id="fonttext" type="text" value="Hello World!">
 
+      <label for="fontselect">Font:</label>
       <select id="fontselect">
         <option id="loading">Loading Fonts...</option>
       </select>
+      <button type="button" id="downloadSvgButton">Download SVG</button>
     </fieldset>
 
     <div id="main" >
       <svg xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink" width="450" height="280"></svg>
+      xmlns:xlink="http://www.w3.org/1999/xlink" width="640" height="280"></svg>
     </div>
 
-    <label>Raw SVG content of text</label><br>
-    <textarea></textarea>
+    <a id="showRaw" href="">Show raw SVG content</a>
+    <div id="rawContent">
+      <label class="hidden">Raw SVG content of text</label><br>
+      <textarea class="hidden"></textarea>  
+    </div>
 
 <script type="text/javascript">
 
@@ -55,6 +85,7 @@
     for (let id in fonts) {
       $('<option>').text(fonts[id].name).val(id).appendTo('#fontselect');
     }
+    $('#fontselect')[0].value= "futural";
 
     $('#fontselect').change(function() {
       $('#textexample').remove(); // Kill the old one (if any)
@@ -81,8 +112,32 @@
     $('input').on('input', function(e){
       $('#fontselect').change();
     });
+
+    $('#showRaw').on('click', function(event){
+      event.preventDefault();
+      $('#showRaw').addClass('hidden');
+      $('#rawContent *').removeClass('hidden');
+    });
+    
+    $('#downloadSvgButton').on('click', exportSVG);
   });
 
+  function exportSVG() {
+    let string = $('#main svg')[0].outerHTML; // raw svg 
+    // console.log(string)
+    if (!string) return;
+    let blob = new Blob([string], {type: "image/svg+xml;charset=utf-8"});
+    let url = window.URL.createObjectURL(blob);
+    let a = document.createElement("a");
+    a.href = url;
+    a.download = truncate($('#fonttext').val().replace(/[^a-z0-9]/gi, '_').toLowerCase(), 100); // download file name
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }
+
+  function truncate(str, n){
+    return (str.length > n) ? str.substr(0, n-1) : str;
+  };
 
 /**
  * Render a string of text in a Hershey engraving font to a given SVG element
